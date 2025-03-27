@@ -1,4 +1,3 @@
-import { ProtectedRoute } from "@/components/protected-route"
 import { LayoutShell } from "@/components/layout-shell"
 import { FootageCard } from "@/components/footage-card"
 import { Button } from "@/components/ui/button"
@@ -94,51 +93,49 @@ const footageData = [
 
 export default function FootagePage() {
   return (
-    <ProtectedRoute>
-      <LayoutShell>
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold tracking-tight">Surveillance Footage</h1>
-        </div>
+    <LayoutShell>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-3xl font-bold tracking-tight">Surveillance Footage</h1>
+      </div>
 
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search by location or tags..." className="pl-8" />
-            </div>
-
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline" className="w-full sm:w-[240px] justify-start text-left font-normal">
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  <span>Select date range</span>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar mode="range" numberOfMonths={2} />
-              </PopoverContent>
-            </Popover>
-
-            <Select defaultValue="all">
-              <SelectTrigger className="w-full sm:w-[180px]">
-                <SelectValue placeholder="Type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Types</SelectItem>
-                <SelectItem value="video">Video</SelectItem>
-                <SelectItem value="image">Image</SelectItem>
-              </SelectContent>
-            </Select>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="relative flex-1">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input placeholder="Search by location or tags..." className="pl-8" />
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {footageData.map((footage) => (
-              <FootageCard key={footage.id} {...footage} />
-            ))}
-          </div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className="w-full sm:w-[240px] justify-start text-left font-normal">
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                <span>Select date range</span>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar mode="range" numberOfMonths={2} />
+            </PopoverContent>
+          </Popover>
+
+          <Select defaultValue="all">
+            <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectValue placeholder="Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="video">Video</SelectItem>
+              <SelectItem value="image">Image</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-      </LayoutShell>
-    </ProtectedRoute>
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {footageData.map((footage) => (
+            <FootageCard key={footage.id} {...footage} />
+          ))}
+        </div>
+      </div>
+    </LayoutShell>
   )
 }
 

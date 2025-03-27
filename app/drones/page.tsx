@@ -1,4 +1,3 @@
-import { ProtectedRoute } from "@/components/protected-route"
 import { LayoutShell } from "@/components/layout-shell"
 import { DroneCard } from "@/components/drone-card"
 import { Button } from "@/components/ui/button"
@@ -84,57 +83,55 @@ const drones = [
 
 export default function DronesPage() {
   return (
-    <ProtectedRoute>
-      <LayoutShell>
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold tracking-tight">Drone Fleet</h1>
-          <Button>
-            <Plus className="mr-2 h-4 w-4" />
-            Add Drone
-          </Button>
+    <LayoutShell>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-3xl font-bold tracking-tight">Drone Fleet</h1>
+        <Button>
+          <Plus className="mr-2 h-4 w-4" />
+          Add Drone
+        </Button>
+      </div>
+
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="relative flex-1">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input placeholder="Search drones..." className="pl-8" />
+          </div>
+          <Select defaultValue="all">
+            <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Status</SelectItem>
+              <SelectItem value="active">Active</SelectItem>
+              <SelectItem value="idle">Idle</SelectItem>
+              <SelectItem value="maintenance">Maintenance</SelectItem>
+              <SelectItem value="offline">Offline</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select defaultValue="all">
+            <SelectTrigger className="w-full sm:w-[180px]">
+              <SelectValue placeholder="Model" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Models</SelectItem>
+              <SelectItem value="dji">DJI</SelectItem>
+              <SelectItem value="autel">Autel</SelectItem>
+              <SelectItem value="skydio">Skydio</SelectItem>
+              <SelectItem value="parrot">Parrot</SelectItem>
+              <SelectItem value="yuneec">Yuneec</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search drones..." className="pl-8" />
-            </div>
-            <Select defaultValue="all">
-              <SelectTrigger className="w-full sm:w-[180px]">
-                <SelectValue placeholder="Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="active">Active</SelectItem>
-                <SelectItem value="idle">Idle</SelectItem>
-                <SelectItem value="maintenance">Maintenance</SelectItem>
-                <SelectItem value="offline">Offline</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select defaultValue="all">
-              <SelectTrigger className="w-full sm:w-[180px]">
-                <SelectValue placeholder="Model" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Models</SelectItem>
-                <SelectItem value="dji">DJI</SelectItem>
-                <SelectItem value="autel">Autel</SelectItem>
-                <SelectItem value="skydio">Skydio</SelectItem>
-                <SelectItem value="parrot">Parrot</SelectItem>
-                <SelectItem value="yuneec">Yuneec</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {drones.map((drone) => (
-              <DroneCard key={drone.id} {...drone} />
-            ))}
-          </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {drones.map((drone) => (
+            <DroneCard key={drone.id} {...drone} />
+          ))}
         </div>
-      </LayoutShell>
-    </ProtectedRoute>
+      </div>
+    </LayoutShell>
   )
 }
 
